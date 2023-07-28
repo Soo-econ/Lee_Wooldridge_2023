@@ -110,16 +110,18 @@ In Step 3 of Procedure 4.1, you can use built-in commands in Stata after selecti
 
 For example, to get Rolling RA estimates for ATTs in each post-treatment period of g4,  $t = 4, 5, 6 $, 
 ```
-	%% Control group consists of g_{\infty} (=Never-treated group) , g_5 and  g_6
+%% Control group consists of g_{\infty} (=Never-treated group) , g_5 and  g_6
 	teffects ra (y_44 x1 x2) (g4) if f04, atet
-	%% Now, Control group was shrinked to g_{\infty} and g6
+
+%% Now, Control group was shrinked to g_{\infty} and g6
 	teffects ra (y_45 x1 x2) (g4) if f05 & ~g5, atet
-	%% Only g_{infty} is in control group
+
+%% Only g_{infty} is in control group
 	teffects ra (y_46 x1 x2) (g4) if f06 & (g5 + g6 != 1), atet
 ```
 For Rolling IPWRA estimates for ATTs in each post-treatment period of g4 at $t = 5$
 ```
-	%% Control group consists of g_{\infty} & g6
+%% Control group consists of g_{\infty} & g6
 	teffects ipwra (y_45 x1 x2) (g4 x1 x2) if f05 & ~g5, atet
 ```
 
