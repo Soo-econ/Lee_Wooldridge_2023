@@ -26,9 +26,9 @@ __Step.2__ Using all of units, apply standard TE methods - such as linear RA, IP
 \{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ , \ i \ = \ 1, \ldots, N ;  t= S, \ldots, T \}
 ```
 
-Here are Stata commands
+** Stata commands *************
 
-__Step.1 Genereting Y dot__
+__Step.1 Genereting $\dot{Y}_{it}$__
 ```
 xtset id year
 	bysort id: gen y_dot = y - (L1.y + L2.y + L3.y)/3 if f04
@@ -40,13 +40,13 @@ __Step.2 Applying standard TE methods you want__
 
 In Step 2 of Procedure 3.1, you can use built-in commands in Stata.
 
-For example, to get Rolling RA estimates for each post-treatment period,  $t = 4, 5, 6 $, 
+For example, to get Rolling RA estimates for ATTs in each post-treatment period,  $t = 4, 5, 6 $, 
 ```
 	teffects ra (y_dot x1 x2) (d) if f04, atet
 	teffects ra (y_dot x1 x2) (d) if f05, atet
 	teffects ra (y_dot x1 x2) (d) if f06, atet
 ```
-For Rolling IPWRA estimates for each post-treatment period,  $t = 4, 5, 6 $
+For Rolling IPWRA estimates for ATTs in each post-treatment period,  $t = 4, 5, 6 $
 ```
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f04, atet
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f05, atet
@@ -85,30 +85,43 @@ __Step.3__ Using the subset of data units ($A_{t+1} +D_g = 1$), apply standard T
 \{ ( \dot{Y}_{igt}, D_{ig}, \mathbf{X}_i ) \quad , { i = 1, \ldots, N; g = S, \ldots, T; t = g, g+1, ..., T } \}
 ```
 
-Here are Stata commands
 
-__Step.1 Genereting Y dot__
+** Stata commands *************
+
+__Step.1 Genereting $\dot{Y}_{igt}$__
 ```
 xtset id year
-	bysort id: gen y_dot = y - (L1.y + L2.y + L3.y)/3 if f04
-	bysort id: replace y_dot = y - (L2.y + L3.y + L4.y)/3 if f05
-	bysort id: replace y_dot = y - (L3.y + L4.y + L5.y)/3 if f06
+%y_i44 , y_i45, y_i46
+	bysort id: gen y_44 = y - (L1.y + L2.y + L3.y)/3 if f04
+	bysort id: gen y_45 = y - (L2.y + L3.y + L4.y)/3 if f05
+	bysort id: gen y_46 = y - (L3.y + L4.y + L5.y)/3 if f06
+
+%y_i55, y_i56
+	bysort id: gen y_55 = y - (L1.y + L2.y + L3.y + L4.y)/4 if f05
+	bysort id: gen y_56 = y - (L2.y + L3.y + L4.y +L5.y)/4 if f06
+
+%y_i66
+	bysort id: gen y_66 = y - (L1.y + L2.y + L3.y + L4.y+L5.y)/5 if f06
 ```
 
-__Step.2 Applying standard TE methods you want__
+__Step.2 & 3 Applying standard TE methods you want__
 
-In Step 2 of Procedure 3.1, you can use built-in commands in Stata.
+In Step 3 of Procedure 4.1, you can use built-in commands in Stata and carefully select "_control group_" 
 
-For example, to get Rolling RA estimates for each post-treatment period,  $t = 4, 5, 6 $, 
+For example, to get Rolling RA estimates for ATTs in each post-treatment period of g4,  $t = 4, 5, 6 $, 
 ```
-	teffects ra (y_dot x1 x2) (d) if f04, atet
-	teffects ra (y_dot x1 x2) (d) if f05, atet
-	teffects ra (y_dot x1 x2) (d) if f06, atet
+	%% Control group consists of g_{\infty} (=Never-treated group) , g_5 and  g_6
+	teffects ra (y_44 x1 x2) (g4) if f04, atet
+	%% Now, Control group was shrinked to g_{\infty} and g6
+	teffects ra (y_45 x1 x2) (g4) if f05 & ~g5, atet
+	%% Only g_{infty} is in control group
+	teffects ra (y_46 x1 x2) (g4) if f06 & (g5 + g6 != 1), atet
 ```
-For Rolling IPWRA estimates for each post-treatment period,  $t = 4, 5, 6 $
+For Rolling IPWRA estimates for ATTs in each post-treatment period of g4 at $t = 5$
 ```
-	teffects ipwra (y_dot x1 x2) (d x1 x2) if f04, atet
-	teffects ipwra (y_dot x1 x2) (d x1 x2) if f05, atet
-	teffects ipwra (y_dot x1 x2) (d x1 x2) if f06, atet
+	%% Control group consists of g_{\infty} & g6
+	teffects ipwra (y_45 x1 x2) (g4 x1 x2) if f05 & ~g5, atet
+```
 
-```
+For more details, please refer to our dofile _"lee_wooldridge_rolling_staggered.do"_, especially _[2] Estimation_ part
+
