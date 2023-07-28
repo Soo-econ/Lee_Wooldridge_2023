@@ -2,7 +2,7 @@
 _"A Simple Transformation Approach to Difference-in-Differences Estimation for Panel Data"_  
 	Available on SSRN https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4516518
 
-## How to Apply Rolling Method to the Panal Data
+## How to Apply Rolling Methods to your Panal Data
 ## 1. Common Timing Case
 
 __Basic set up__
@@ -39,13 +39,13 @@ __Step.2 Applying standard TE methods you want__
 
 In Step 2 of Procedure 3.1, you can use built-in commands in Stata.
 
-For example, to get Rolling RA estimates for each post-treatment,  $t = 4, 5, 6 $, 
+For example, to get Rolling RA estimates for each post-treatment period,  $t = 4, 5, 6 $, 
 ```
 	teffects ra (y_dot x1 x2) (d) if f04, atet
 	teffects ra (y_dot x1 x2) (d) if f05, atet
 	teffects ra (y_dot x1 x2) (d) if f06, atet
 ```
-For Rolling IPWRA estimates for each post-treatment,  $t = 4, 5, 6 $
+For Rolling IPWRA estimates for each post-treatment period,  $t = 4, 5, 6 $
 ```
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f04, atet
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f05, atet
@@ -53,7 +53,7 @@ For Rolling IPWRA estimates for each post-treatment,  $t = 4, 5, 6 $
 
 ```
 
-For more details, please refer to the [2] Estimation part in dofile named, _"lee_wooldridge_rolling_common.do"_
+For more details, please refer to our dofile _"lee_wooldridge_rolling_common.do"_, especially _[2] Estimation_ part
 
 
 ## 2. Staggered Intervension Case
@@ -71,11 +71,16 @@ __Basic set up__
 ### Procedure 4.1
 __Step.1__ For $t \in \{ g, g+1, \ldots, T \}$ and each unit $i$, compute
 ```math
-    \dot{Y}_{it} \equiv Y_{it}-\frac{1}{S-1} \sum_{q=1}^{S-1} Y_{iq}
+   \dot{Y}_{igt} \equiv Y_{it}-\frac{1}{g-1} \sum_{q=1}^{g-1} Y_{iq}
 ```
-__Step.2__ Using all of units, apply standard TE methods - such as linear RA, IPW, IPWRA, PS matching - to the cross section
+__Step.2__ Choose as the control group the not-yet-treated units with 
 ```math
-\{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ : \ i \ = \ 1, \ldots, N , \quad t= S, \ldots, T \}
+A_{t+1} \equiv  D_{i, t+1} + D_{i,t+2} + \cdots + D_T + D_{\infty} = 1
+
+```
+__Step.3__ Using the subset of data units ($A_{t+1} +D_g = 1$), apply standard TE methods - such as linear RA, IPW, IPWRA, PS matching - to
+```math
+\{ ( \dot{Y}_{igt}, D_{ig}, \mathbf{X}_i ) \quad , \Scale[.9]{ i = 1, \ldots, N; g = S, \ldots, T; t = g, g+1, ..., T } \}
 ```
 
 Here are Stata commands
@@ -92,13 +97,13 @@ __Step.2 Applying standard TE methods you want__
 
 In Step 2 of Procedure 3.1, you can use built-in commands in Stata.
 
-For example, to get Rolling RA estimates for each post-treatment,  $t = 4, 5, 6 $, 
+For example, to get Rolling RA estimates for each post-treatment period,  $t = 4, 5, 6 $, 
 ```
 	teffects ra (y_dot x1 x2) (d) if f04, atet
 	teffects ra (y_dot x1 x2) (d) if f05, atet
 	teffects ra (y_dot x1 x2) (d) if f06, atet
 ```
-For Rolling IPWRA estimates for each post-treatment,  $t = 4, 5, 6 $
+For Rolling IPWRA estimates for each post-treatment period,  $t = 4, 5, 6 $
 ```
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f04, atet
 	teffects ipwra (y_dot x1 x2) (d x1 x2) if f05, atet
