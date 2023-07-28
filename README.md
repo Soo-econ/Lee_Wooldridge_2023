@@ -57,7 +57,7 @@ For Rolling IPWRA estimates for ATTs in each post-treatment period,  $t = 4, 5, 
 
 ```
 
-For more details, please refer to our dofile _"lee_wooldridge_rolling_common_20230713.do"_, especially _[2] Estimation_ part
+For more details, please refer to our do file _"lee_wooldridge_rolling_common_20230713.do"_, especially _[2] Estimation_ part
 
 
 
@@ -135,5 +135,5 @@ For Rolling IPWRA estimates for ATTs in each post-treatment period of g4 at $t =
 	teffects ipwra (y_45 x1 x2) (g4 x1 x2) if f05 & ~g5, atet
 ```
 
-For more details, please refer to our dofile _"lee_wooldridge_rolling_staggered_20230713.do"_, especially _[2] Estimation_ part
+For more details, please refer to our do file _"lee_wooldridge_rolling_staggered_20230713.do"_, especially _[2] Estimation_ part
 
