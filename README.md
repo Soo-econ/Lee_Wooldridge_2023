@@ -124,7 +124,7 @@ For example, to get Rolling RA estimates for ATTs in each post-treatment period 
 %% Control group consists of g_{\infty} (=Never-treated group) , g_5 and  g_6
 	teffects ra (y_44 x1 x2) (g4) if f04, atet
 
-%% Now, Control group was shrinked to g_{\infty} and g6
+%% Now, Control group was reduced to g_{\infty} and g6
 	teffects ra (y_45 x1 x2) (g4) if f05 & ~g5, atet
 
 %% Only g_{\infty} is in control group
