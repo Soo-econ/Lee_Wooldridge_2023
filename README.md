@@ -29,5 +29,19 @@ Here are Stata commands
 
 __Step.1 Genereting Y dot__
 ```
+xtset id year
+	bysort id: gen y_dot = y - (L1.y + L2.y + L3.y)/3 if f04
+	bysort id: replace y_dot = y - (L2.y + L3.y + L4.y)/3 if f05
+	bysort id: replace y_dot = y - (L3.y + L4.y + L5.y)/3 if f06
+```
+
+__Step.2 Applying standard TE methods you want__
+
+In Step.2 of Procedure 3.1, you can use built-in commands in Stata
+For example, to get IPWRA estimates for each post-treatment $t = 4,5,6$
+```
+	teffects ipwra (y_dot x1 x2) (d x1 x2) if f04, atet
+	teffects ipwra (y_dot x1 x2) (d x1 x2) if f05, atet
+	teffects ipwra (y_dot x1 x2) (d x1 x2) if f06, atet
 
 ```
