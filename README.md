@@ -2,7 +2,7 @@
 _"A Simple Transformation Approach to Difference-in-Differences Estimation for Panel Data"_  
 	Available on SSRN https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4516518
 
-## How to Apply Rolling Methods to the Panal Data
+## How to Apply Rolling Methods
 ## 1. Common Timing Case
 
 __Basic set up__
