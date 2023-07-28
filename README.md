@@ -9,11 +9,12 @@ __Basic set up__
 
 1) Time Periods: $t \in {1,...,T}$
 
-2) Time dummies: $f2_t, ...,fT_t$ , i.e., $f4 =1$ if $t=4$
+	- Time dummies: $f2_t, ...,fT_t$
+ 	- i.e., $f4 =1$ if $t=4$
 
-3) The first Intervention occurs at $S$, $1 < S \leq T$
+2) First intervention occurs at $S$, $1 < S \leq T$
 
-4) There are two observable covariates $X=(X_1, X_2)$
+3) There are two observable covariates $X=(X_1, X_2)$
 
 ### Procedure 3.1
 __Step.1__ For a given time period $t = S, \ldots, T$ and each unit $i$, compute
@@ -57,17 +58,23 @@ For Rolling IPWRA estimates for ATTs in each post-treatment period,  $t = 4, 5, 
 For more details, please refer to our dofile _"lee_wooldridge_rolling_common_20230713.do"_, especially _[2] Estimation_ part
 
 
+
+
 ## 2. Staggered Intervension Case
 
 __Basic set up__
 
-1) Time Periods: $t \in {1,...,T}$
+1) Time Periods: $t \in \{1,...,T\}$
 
-2) Time dummies: $f2_t, ...,fT_t$ , i.e., $f4 =1$ if $t=4$
+2) First unit is treated at $S$, $1 < S \leq T$
 
-3) The first Intervention occurs at $S$, $1 < S \leq T$
+3) Cohort Indicator, for $g \in\{S,...,T\}$
+
+   - $D_g=1$ if unit $i$ is first subjected to the intervention at time $g$
+   - $D_\infty=1$ if unit is never treated in $ S,...,T$
 
 4) There are two observable covariates $X=(X_1, X_2)$
+
 
 ### Procedure 4.1
 __Step.1__ For $t \in \{ g, g+1, \ldots, T \}$ and each unit $i$, compute
