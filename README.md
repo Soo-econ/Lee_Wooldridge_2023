@@ -27,7 +27,9 @@ __Step.2__ Using all of units, apply standard TE methods - such as linear RA, IP
 \{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ , \ i \ = \ 1, \ldots, N ;  t= S, \ldots, T \}
 ```
 
-** Stata commands *************
+
+
+>Stata commands
 
 __Step.1 Genereting $\dot{Y}_{it}$__
 ```
@@ -93,7 +95,8 @@ __Step.3__ Using the subset of data units ($A_{t+1} +D_g = 1$), apply standard T
 ```
 
 
-** Stata commands *************
+
+> Stata commands
 
 __Step.1 Genereting $\dot{Y}_{igt}$__
 ```
