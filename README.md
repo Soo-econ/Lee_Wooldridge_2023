@@ -106,7 +106,7 @@ xtset id year
 
 __Step.2 & 3 Applying standard TE methods you want__
 
-In Step 3 of Procedure 4.1, you can use built-in commands in Stata and carefully select "_control group_" 
+In Step 3 of Procedure 4.1, you can use built-in commands in Stata after selecting "_control group_" carefully.
 
 For example, to get Rolling RA estimates for ATTs in each post-treatment period of g4,  $t = 4, 5, 6 $, 
 ```
