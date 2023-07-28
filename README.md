@@ -25,4 +25,9 @@ __Step.2__ Using all of units, apply standard TE methods - such as linear RA, IP
 \{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ : \ i \ = \ 1, \ldots, N , \quad t= S, \ldots, T \}
 ```
 
-Here are
+Here are Stata commands
+
+__Step.1 Genereting Y dot__
+```
+
+```
