@@ -16,3 +16,13 @@ __Basic set up__
 4) There are two observable covariates $X=(X_1, X_2)$
 
 ### Procedure 3.1
+__Step.1__ For a given time period $t = S, \ldots, T$ and each unit $i$, compute
+```math
+    \dot{Y}_{it} \equiv Y_{it}-\frac{1}{S-1} \sum_{q=1}^{S-1} Y_{iq}
+```
+__Step.2__ Using all of units, apply standard TE methods - such as linear RA, IPW, IPWRA, PS matching - to the cross section
+```math
+\{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ : \ i \ = \ 1, \ldots, N , \quad t= S, \ldots, T \}
+```
+
+Here are
