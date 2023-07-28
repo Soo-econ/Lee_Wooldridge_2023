@@ -20,9 +20,10 @@ __Step.1__ For a given time period $t = S, \ldots, T$ and each unit $i$, compute
 ```math
     \dot{Y}_{it} \equiv Y_{it}-\frac{1}{S-1} \sum_{q=1}^{S-1} Y_{iq}
 ```
+
 __Step.2__ Using all of units, apply standard TE methods - such as linear RA, IPW, IPWRA, PS matching - to the cross section
 ```math
-\{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ : \ i \ = \ 1, \ldots, N , \quad t= S, \ldots, T \}
+\{ ( \dot{Y}_{it}, D_i, \mathbf{X}_i) \ , \ i \ = \ 1, \ldots, N ;  t= S, \ldots, T \}
 ```
 
 Here are Stata commands
@@ -73,14 +74,15 @@ __Step.1__ For $t \in \{ g, g+1, \ldots, T \}$ and each unit $i$, compute
 ```math
    \dot{Y}_{igt} \equiv Y_{it}-\frac{1}{g-1} \sum_{q=1}^{g-1} Y_{iq}
 ```
+
 __Step.2__ Choose as the control group the not-yet-treated units with 
 ```math
 A_{t+1} \equiv  D_{i, t+1} + D_{i,t+2} + \cdots + D_T + D_{\infty} = 1
-
 ```
+
 __Step.3__ Using the subset of data units ($A_{t+1} +D_g = 1$), apply standard TE methods - such as linear RA, IPW, IPWRA, PS matching - to
 ```math
-\{ ( \dot{Y}_{igt}, D_{ig}, \mathbf{X}_i ) \quad , \Scale[.9]{ i = 1, \ldots, N; g = S, \ldots, T; t = g, g+1, ..., T } \}
+\{ ( \dot{Y}_{igt}, D_{ig}, \mathbf{X}_i ) \quad , { i = 1, \ldots, N; g = S, \ldots, T; t = g, g+1, ..., T } \}
 ```
 
 Here are Stata commands
