@@ -9,8 +9,8 @@ __Basic set up__
 
 1) Time Periods: $t \in {1,...,T}$
 
-	- Time dummies: $f2_t, ...,fT_t$
- 	- i.e., $f4 =1$ if $t=4$
+	- Time dummies: $f02_t, ...,f0T_t$
+ 	- i.e., $f04 =1$ if $t=4$
 
 2) First intervention occurs at $S$, $1 < S \leq T$
 
